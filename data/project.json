@@ -1,0 +1,51 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "The Abu Dhabi Plan",
+      "client": "Abu Dhabi Executive Council",
+      "category": "Government / Strategic Communication",
+      "data_cat": "government",
+      "languages": "Arabic & English",
+      "classification": "TVC",
+      "vimeo_id": "414307456",
+      "video_url": "https://video.wixstatic.com/video/8c2c22_13c6aa4d9ebb4e6d9e591dcaaa7cb89e/720p/mp4/file.mp4",
+      "poster_image": "https://res.cloudinary.com/dvqsa7ko7/image/upload/v1760834561/THE_ABU_DHABI_PLAN_rakbuq.png",
+      "poster_image_srcset": "https://res.cloudinary.com/dvqsa7ko7/image/upload/v1760834561/THE_ABU_DHABI_PLAN_rakbuq.png 300w, https://res.cloudinary.com/dvqsa7ko7/image/upload/v1760834561/THE_ABU_DHABI_PLAN_rakbuq.png 800w",
+      "link": "works/project-detail#id=1",
+      "credits": [
+        {"role": "Client", "name": "Abu Dhabi Executive Council"},
+        {"role": "Production Company", "name": "DubaiFilmMaker"}
+      ]
+    },
+    {
+      "id": 2,
+      "title": "The Abu Dhabi Plan Reem Cutdown",
+      "client": "Abu Dhabi Executive Council",
+      "category": "Government / Strategic Communication",
+      "data_cat": "government",
+      "languages": "Arabic & English",
+      "classification": "TVC",
+      "vimeo_id": "204205086",
+      "video_url": "https://video.wixstatic.com/video/8c2c22_13c6aa4d9ebb4e6d9e591dcaaa7cb89e/720p/mp4/file.mp4",
+      "poster_image": "https://res.cloudinary.com/dvqsa7ko7/image/upload/v1760834423/THE_ABU_DHABI_PLAN_-_FAISA_kcjtth.png",
+      "poster_image_srcset": "https://res.cloudinary.com/dvqsa7ko7/image/upload/v1760834423/THE_ABU_DHABI_PLAN_-_FAISA_kcjtth.png 300w, https://res.cloudinary.com/dvqsa7ko7/image/upload/v1760834423/THE_ABU_DHABI_PLAN_-_FAISA_kcjtth.png 800w",
+      "link": "works/project-detail#id=2",
+      "credits": [
+        {"role": "Client", "name": "Abu Dhabi Executive Council"},
+        {"role": "Production Company", "name": "DubaiFilmMaker"}
+      ]
+    }
+  ],
+  "categories": [
+    "corporate",
+    "business", 
+    "tourism",
+    "government"
+  ],
+  "classifications": [
+    "TVC",
+    "BRAND FILM"
+  ],
+  "total_projects": 16
+}

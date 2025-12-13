@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Azeret+Mono&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@700&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicons/favicon-32x32.png%20favicon-32x32.html"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicons/favicon-16x16.png%20favicon-16x16.html"
+    />
+    <link rel="manifest" href="assets/favicons/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="assets/favicons/safari-pinned-tab.svg"
+      color="#000000"
+    />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="3.7.8/plyr.css" />
+
+    <link href="assets/dist/build.min.css" rel="stylesheet" />
+
+    <link rel="canonical" href="index.html" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="DubaiFilmMaker – Homepage" />
+    <meta property="og:site_name" content="Poster" />
+    <meta property="og:url" content="index.html" />
+    <meta name="twitter:title" content="DubaiFilmMaker – Homepage" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta
+      name="description"
+      content="Post-Production company based in the heart of Paris, dedicated to audiovisual production, advertisement, digital content, music video feature films & documentaries."
+    />
+    <meta
+      property="og:description"
+      content="Post-Production company based in the heart of Paris, dedicated to audiovisual production, advertisement, digital content, music video feature films & documentaries."
+    />
+
+    <title>DubaiFilmMaker – Homepage</title>
+
+    <style>
+      /* Fix video thumbnail aspect ratio - prevent squishing */
+      .bloc-projects-listing
+        .box--work__video.video-wrapper.has-poster
+        img.video-img-poster {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
+      }
+
+      /* Ensure video wrapper maintains proper dimensions */
+      .bloc-projects-listing .box--work__video.video-wrapper {
+        position: relative !important;
+        overflow: hidden !important;
+      }
+
+      /* Header styles loaded from data/header.json - prevent FOUC */
+      .header__logo {
+        object-fit: contain !important;
+        height: auto !important;
+        opacity: 0;
+        transition: opacity 0.15s ease-in;
+      }
+      
+      .header__logo.loaded {
+        opacity: 1;
+      }
+    </style>
+    
+    <!-- Critical header CSS - loads synchronously to prevent FOUC -->
+    <script>
+      (function() {
+        // Synchronous XHR to load config before page renders
+        try {
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/data/header.json', false); // false = synchronous
+          xhr.send();
+          
+          if (xhr.status === 200) {
+            var config = JSON.parse(xhr.responseText);
+            var preset = config.activePreset || 'default';
+            var presetConfig = config.presets[preset];
+            
+            if (presetConfig) {
+              // Store for later use by site-config.js
+              window.__headerConfig = config;
+              window.__headerPreset = presetConfig;
+              window.__headerPresetName = preset;
+              
+              // Inject critical CSS immediately
+              var style = document.createElement('style');
+              style.id = 'header-critical-css';
+              style.textContent = generateHeaderCSS(presetConfig);
+              document.head.appendChild(style);
+              
+              // Update logo src immediately when DOM is ready
+              if (presetConfig.logo && presetConfig.logo.src) {
+                document.addEventListener('DOMContentLoaded', function() {
+                  var logos = document.querySelectorAll('.header__logo');
+                  logos.forEach(function(logo) {
+                    logo.src = presetConfig.logo.src;
+                    if (presetConfig.logo.alt) {
+                      logo.alt = presetConfig.logo.alt;
+                    }
+                    // Show logo after src is updated
+                    logo.classList.add('loaded');
+                  });
+                });
+              }
+              
+              console.log('✓ Critical header CSS loaded synchronously:', preset);
+            }
+          }
+        } catch (e) {
+          console.warn('Could not load header config synchronously:', e);
+        }
+        
+        function generateHeaderCSS(preset) {
+          var css = '';
+          
+          // Mobile styles
+          if (preset.mobile) {
+            css += '@media (max-width: 767px) {';
+            css += 'html body.template-projects .app-container .header .header__nav, html body.template-homepage .app-container .header .header__nav, html body.template-about .app-container .header .header__nav, html body.template-contact .app-container .header .header__nav {';
+            css += 'display: flex !important;';
+            css += 'align-items: ' + preset.mobile.headerNav.alignItems + ' !important;';
+            css += 'padding: ' + preset.mobile.headerNav.padding + ' !important;';
+            css += 'min-height: ' + preset.mobile.headerNav.minHeight + ' !important;';
+            if (preset.mobile.headerNav.flexDirection) css += 'flex-direction: ' + preset.mobile.headerNav.flexDirection + ' !important;';
+            if (preset.mobile.headerNav.justifyContent) css += 'justify-content: ' + preset.mobile.headerNav.justifyContent + ' !important;';
+            if (preset.mobile.headerNav.gap) css += 'gap: ' + preset.mobile.headerNav.gap + ' !important;';
+            if (preset.mobile.headerNav.width) css += 'width: ' + preset.mobile.headerNav.width + ' !important;';
+            css += '}';
+            
+            css += 'html body.template-projects .app-container .header .header__nav .logo-link, html body.template-homepage .app-container .header .header__nav .logo-link, html body.template-about .app-container .header .header__nav .logo-link, html body.template-contact .app-container .header .header__nav .logo-link {';
+            css += 'display: flex !important; align-items: center !important;';
+            if (preset.mobile.logoLink.maxWidth) css += 'max-width: ' + preset.mobile.logoLink.maxWidth + ' !important;';
+            if (preset.mobile.logoLink.flex) css += 'flex: ' + preset.mobile.logoLink.flex + ' !important;';
+            if (preset.mobile.logoLink.flexShrink) css += 'flex-shrink: ' + preset.mobile.logoLink.flexShrink + ' !important;';
+            if (preset.mobile.logoLink.paddingRight) css += 'padding-right: ' + preset.mobile.logoLink.paddingRight + ' !important;';
+            if (preset.mobile.logoLink.width) css += 'width: ' + preset.mobile.logoLink.width + ' !important;';
+            if (preset.mobile.logoLink.margin) css += 'margin: ' + preset.mobile.logoLink.margin + ' !important;';
+            css += '}';
+            
+            css += 'html body.template-projects .app-container .header .header__nav .logo-link .header__logo, html body.template-homepage .app-container .header .header__nav .logo-link .header__logo, html body.template-about .app-container .header .header__nav .logo-link .header__logo, html body.template-contact .app-container .header .header__nav .logo-link .header__logo {';
+            css += 'display: block !important;';
+            css += 'max-height: ' + preset.mobile.logo.maxHeight + ' !important;';
+            css += 'max-width: ' + preset.mobile.logo.maxWidth + ' !important;';
+            css += 'width: ' + preset.mobile.logo.width + ' !important;';
+            css += preset.mobile.logo.margin ? 'margin: ' + preset.mobile.logo.margin + ' !important;' : 'margin: 0 !important;';
+            css += '}';
+            
+            css += 'html body.template-projects .app-container .header .header__nav .btn--menu, html body.template-homepage .app-container .header .header__nav .btn--menu, html body.template-about .app-container .header .header__nav .btn--menu, html body.template-contact .app-container .header .header__nav .btn--menu { flex-shrink: 0 !important; margin: 0 !important; }';
+            css += '}';
+          }
+          
+          // Desktop styles
+          if (preset.desktop) {
+            css += '@media (min-width: 768px) {';
+            if (preset.desktop.headerNav) {
+              css += 'html body.template-projects .app-container .header .header__nav, html body.template-homepage .app-container .header .header__nav, html body.template-about .app-container .header .header__nav, html body.template-contact .app-container .header .header__nav {';
+              css += 'display: flex !important;';
+              if (preset.desktop.headerNav.flexDirection) css += 'flex-direction: ' + preset.desktop.headerNav.flexDirection + ' !important;';
+              if (preset.desktop.headerNav.justifyContent) css += 'justify-content: ' + preset.desktop.headerNav.justifyContent + ' !important;';
+              if (preset.desktop.headerNav.gap) css += 'gap: ' + preset.desktop.headerNav.gap + ' !important;';
+              if (preset.desktop.headerNav.alignItems) css += 'align-items: ' + preset.desktop.headerNav.alignItems + ' !important;';
+              if (preset.desktop.headerNav.width) css += 'width: ' + preset.desktop.headerNav.width + ' !important;';
+              if (preset.desktop.headerNav.minHeight) css += 'min-height: ' + preset.desktop.headerNav.minHeight + ' !important;';
+              css += '}';
+            }
+            
+            if (preset.desktop.logoLink) {
+              css += 'html body.template-projects .app-container .header .header__nav .logo-link, html body.template-homepage .app-container .header .header__nav .logo-link, html body.template-about .app-container .header .header__nav .logo-link, html body.template-contact .app-container .header .header__nav .logo-link {';
+              if (preset.desktop.logoLink.width) css += 'width: ' + preset.desktop.logoLink.width + ' !important;';
+              if (preset.desktop.logoLink.flexShrink) css += 'flex-shrink: ' + preset.desktop.logoLink.flexShrink + ' !important;';
+              if (preset.desktop.logoLink.margin) css += 'margin: ' + preset.desktop.logoLink.margin + ' !important;';
+              css += '}';
+            }
+            
+            css += 'html body.template-projects .app-container .header .header__nav .logo-link .header__logo, html body.template-homepage .app-container .header .header__nav .logo-link .header__logo, html body.template-about .app-container .header .header__nav .logo-link .header__logo, html body.template-contact .app-container .header .header__nav .logo-link .header__logo {';
+            css += 'display: block !important;';
+            css += 'max-height: ' + preset.desktop.logo.maxHeight + ' !important;';
+            css += 'width: ' + preset.desktop.logo.width + ' !important;';
+            if (preset.desktop.logo.margin) css += 'margin: ' + preset.desktop.logo.margin + ' !important;';
+            css += '}';
+            css += '}';
+          }
+          
+          // Extra large styles
+          if (preset.extraLarge) {
+            css += '@media (min-width: 1200px) {';
+            css += 'html body.template-projects .app-container .header .header__nav .logo-link .header__logo, html body.template-homepage .app-container .header .header__nav .logo-link .header__logo, html body.template-about .app-container .header .header__nav .logo-link .header__logo, html body.template-contact .app-container .header .header__nav .logo-link .header__logo {';
+            css += 'max-height: ' + preset.extraLarge.logo.maxHeight + ' !important;';
+            css += '}';
+            css += '}';
+          }
+          
+          return css;
+        }
+      })();
+    </script>
+  </head>
+  <body class="template-homepage">
+    <main class="main">
+      <div class="app-container">
+        <div class="app-container-inner">
+          <header class="header">
+            <div class="header__nav">
+              <a href="index" data-navigo class="logo-link">
+                <img
+                  class="header__logo"
+                  src="assets/img/version_2/dubaifilmmaker.svg"
+                  alt="Poster"
+                />
+              </a>
+              <a href="#main_menu" class="btn btn--menu">
+                <span>menu.</span>
+              </a>
+            </div>
+
+            <div class="header__navigations-wrapper">
+              <nav id="main_menu" class="header__subnav">
+                <ul>
+                  <li data-slug="homepage">
+                    <a
+                      data-navigo
+                      data-slug="homepage"
+                      aria-current="page"
+                      class="force-active"
+                      href="#"
+                    >
+                      Homepage
+                    </a>
+                  </li>
+                  <li data-slug="works">
+                    <a data-navigo data-slug="works" href="works"> Works </a>
+                  </li>
+                  <li data-slug="about">
+                    <a data-navigo data-slug="about" href="about"> About </a>
+                  </li>
+                  <li data-slug="contact">
+                    <a data-navigo data-slug="contact" href="contact">
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+
+              <div class="projects-nav">
+                <ul class="list list--cat">
+                  <li>
+                    <a href="#works" class="js-filter-cat" data-cat="*">all</a>
+                  </li>
+                  <li>
+                    <a
+                      href="#works"
+                      class="js-filter-cat"
+                      data-cat="*"
+                      >TVC / Brand Films</a
+                    >
+                  </li>
+
+                   <li>
+                    <a
+                      href="#works"
+                      class="js-filter-cat"
+                      data-cat="*"
+                      >Narrative Films</a
+                    >
+                  </li>
+  
+                </ul>
+              </div>
+            </div>
+          </header>
+          <div class="page-inner-content">
+            <div class="homepage-inner-wrapper">
+              <h1 class="hidden">Poster</h1>
+              <!-- 
+              <div class="bloc-intro">
+                <div class="intro-anim-surwrapper">
+                  <div class="intro-anim-wrapper">
+                    <div
+                      class="intro-anim"
+                      data-animation="assets/img/intro-animation.json"
+                    ></div>
+                  </div>
+                </div>
+                <div class="intro-timeline"><div class="inner"></div></div>
+              </div> -->
+
+            
+            <div class="box box--home">
+                <div class="box--home__info">
+                  <div class="box--home__info__counter"><span>1</span>/<span id="slider-total">2</span></div>
+
+                  <ul class="list list--home js-has-cursor-player" id="homepage-slider" data-has-fallback="true">
+                    <div
+                      class="cursor-player-animated js-cursor-player-animated"
+                    >
+                      <div
+                        class="mooving-elements players-wrapper is-player"
+                        data-friction="7"
+                      >
+                        <video
+                          class="js-video player-animated-player"
+                          data-src="https://player.vimeo.com/progressive_redirect/playback/1138590247/rendition/1080p/file.mp4?loc=external&oauth2_token_id=1774001646&signature=d1b922200536b43fc753cfb2b508791586b82cec2b968a61e7b64f4a4be7db1b"
+                          playsinline=""
+                          loop=""
+                          muted=""
+                        ></video>
+                        <video
+                          class="js-video player-animated-player"
+                          data-src="https://player.vimeo.com/progressive_redirect/playback/1131754070/rendition/720p/file.mp4?loc=external&oauth2_token_id=1774001646&signature=bd994a7f5ab9ecbccd12d91b898754aad3774cfa7f2fdaf9bae745895844f384"
+                          playsinline=""
+                          loop=""
+                          muted=""
+                        ></video>
+                      </div>
+                    </div>
+
+                    <li class="is-active">
+                      <a href="works/viktor-rolf.html" class="js-change-video">
+                        <h2>Viktor & Rolf</h2>
+                        <p>Flowerbomb</p>
+                        <p>Commercials</p>
+                      </a>
+                    </li>
+
+                    <li class="">
+                      <a href="works/rose-gray.html" class="js-change-video">
+                        <h2>Rose Gray</h2>
+                        <p>I don't speak french</p>
+                        <p>Music videos</p>
+                      </a>
+                    </li>
+
+                  </ul>
+                  <div class="box--home__timeline">
+                    <span class="is-animated"></span>
+                  </div>
+                </div>
+
+                <a
+                  href="works/project-detail#id=1"
+                  class="box--home__link js-has-cursor-text"
+                  id="homepage-main-link"
+                  onclick="window.location.replace('works/project-detail#id=1'); return false;"
+                >
+                  <div class="box--home__wrapper video-wrapper" id="homepage-main-video-wrapper">
+                    <video
+                      class="js-main-video"
+                      data-src="https://player.vimeo.com/progressive_redirect/playback/1138590247/rendition/1080p/file.mp4?loc=external&oauth2_token_id=1774001646&signature=d1b922200536b43fc753cfb2b508791586b82cec2b968a61e7b64f4a4be7db1b"
+                      muted=""
+                      playsinline=""
+                    ></video>
+
+                    <video
+                      class="js-main-video"
+                      data-src="https://player.vimeo.com/progressive_redirect/playback/1131754070/rendition/1080p/file.mp4?loc=external&oauth2_token_id=1774001646&signature=95f62462b767ea64aa527c718f85565bbba99cc626438f54a7bb2798a7173cfd"
+                      muted=""
+                      playsinline=""
+                    ></video>
+
+                  </div>
+                  <div class="cursor-text-animated js-cursor-text-animated">
+                    <div class="mooving-elements is-arrow" data-friction="1">
+                      <svg
+                        width="11"
+                        height="10"
+                        viewbox="0 0 11 10"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8.72366 3.91174H7.0685L5.14349 3.8482L6.53777 4.99985L8.40882 6.65189L7.19444 7.72412L5.3234 6.07209L4.01007 4.83306L4.07303 6.50892L4.06404 8.02593L2.3819 6.54069L2.39989 2.42649L7.04152 2.42649L8.72366 3.91174Z"
+                          fill="white"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div
+                      class="mooving-elements shift cursor-main-text"
+                      data-friction="5"
+                    >
+                      open Viktor & Rolf
+                    </div>
+                  </div>
+                </a>
+
+                <div class="box--home__buttons-mobile">
+                  <a
+                    href="works/project-detail#id=1"
+                    class="mobile-link"
+                    id="homepage-mobile-link"
+                    onclick="window.location.replace('works/project-detail#id=1'); return false;"
+                    >view project</a
+                  >
+                  <div class="arrows">
+                    <button class="arrow-prev">←</button>
+                    <button class="arrow-next">→</button>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="bloc-projects-listing">
+                <ul id="works" class="list list--works" data-initial-count="2">
+                  <!-- First 2 projects loaded immediately for build.min.js initialization -->
+                  <li class="box box--work initial-project" data-cat="government">
+                    <a href="works/project-detail#id=1" class="box--work__link js-has-cursor-text">
+                      <div class="box--work__info">
+                        <h2>The Abu Dhabi Plan</h2>
+                        <p>Abu Dhabi Executive Council</p>
+                        <p>Government / Strategic Communication</p>
+                      </div>
+                      <div class="box--work__video video-wrapper has-poster">
+                        <img class="video-img-poster lazy-media loaded" src="https://res.cloudinary.com/dvqsa7ko7/image/upload/v1760834561/THE_ABU_DHABI_PLAN_rakbuq.png" alt="">
+                        <video class="js-video lazy-media loaded" src="https://video.wixstatic.com/video/8c2c22_13c6aa4d9ebb4e6d9e591dcaaa7cb89e/720p/mp4/file.mp4" playsinline loop muted></video>
+                      </div>
+                      <div class="cursor-text-animated js-cursor-text-animated">
+                        <div class="mooving-elements is-arrow" data-friction="1">
+                          <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.72366 3.91174H7.0685L5.14349 3.8482L6.53777 4.99985L8.40882 6.65189L7.19444 7.72412L5.3234 6.07209L4.01007 4.83306L4.07303 6.50892L4.06404 8.02593L2.3819 6.54069L2.39989 2.42649L7.04152 2.42649L8.72366 3.91174Z" fill="white"/>
+                          </svg>
+                        </div>
+                        <div class="mooving-elements shift cursor-main-text" data-friction="5">
+                          <h2>The Abu Dhabi Plan</h2>
+                          <p>Abu Dhabi Executive Council</p>
+                          <p>Government / Strategic Communication</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="box box--work initial-project" data-cat="government">
+                    <a href="works/project-detail#id=2" class="box--work__link js-has-cursor-text">
+                      <div class="box--work__info">
+                        <h2>The Abu Dhabi Plan Reem Cutdown</h2>
+                        <p>Abu Dhabi Executive Council</p>
+                        <p>Government / Strategic Communication</p>
+                      </div>
+                      <div class="box--work__video video-wrapper has-poster">
+                        <img class="video-img-poster lazy-media loaded" src="https://res.cloudinary.com/dvqsa7ko7/image/upload/v1760834423/THE_ABU_DHABI_PLAN_-_FAISA_kcjtth.png" alt="">
+                        <video class="js-video lazy-media loaded" src="https://video.wixstatic.com/video/8c2c22_13c6aa4d9ebb4e6d9e591dcaaa7cb89e/720p/mp4/file.mp4" playsinline loop muted></video>
+                      </div>
+                      <div class="cursor-text-animated js-cursor-text-animated">
+                        <div class="mooving-elements is-arrow" data-friction="1">
+                          <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.7236n6 3.91174H7.0685L5.14349 3.8482L6.53777 4.99985L8.40882 6.65189L7.19444 7.72412L5.3234 6.07209L4.01007 4.83306L4.07303 6.50892L4.06404 8.02593L2.3819 6.54069L2.39989 2.42649L7.04152 2.42649L8.72366 3.91174Z" fill="white"/>
+                          </svg>
+                        </div>
+                        <div class="mooving-elements shift cursor-main-text" data-friction="5">
+                          <h2>The Abu Dhabi Plan Reem Cutdown</h2>
+                          <p>Abu Dhabi Executive Council</p>
+                          <p>Government / Strategic Communication</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- Remaining projects will be loaded progressively -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!--  -->
+
+    <script src="assets/js/data-loader.js"></script>
+    <script src="assets/js/page-renderer.js"></script>
+    <script src="assets/js/app-init.js"></script>
+    <script src="assets/js/site-config.js"></script>
+    <script src="assets/dist/build.min.js"></script>
+    <script>
+      // Re-initialize build.min.js hover effects after dynamic content loads
+      window.addEventListener('projects-rendered', function() {
+        console.log('🔄 Re-initializing build.min.js hover effects...');
+        
+        // Find the bloc-projects-listing element
+        const projectsListing = document.querySelector('.bloc-projects-listing');
+        if (projectsListing) {
+          // Query all videos and re-attach hover listeners manually
+          const videos = projectsListing.querySelectorAll('.js-video');
+          console.log(`Found ${videos.length} videos to re-initialize`);
+          
+          videos.forEach(video => {
+            // Remove old listeners by cloning
+            const newVideo = video.cloneNode(true);
+            video.parentNode.replaceChild(newVideo, video);
+            
+            // Add hover listeners (matching build.min.js logic from lines 24165-24173)
+            newVideo.addEventListener('mouseenter', function(e) {
+              const vid = e.target;
+              vid.currentTime = 0;
+              vid.parentElement.classList.add('show-video');
+              vid.play();
+              console.log('✓ Video playing on hover');
+            });
+            
+            newVideo.addEventListener('mouseleave', function(e) {
+              const vid = e.target;
+              vid.parentElement.classList.remove('show-video');
+              vid.pause();
+              if (!vid.parentElement.querySelector('.video-img-poster')) {
+                vid.currentTime = 0;
+              }
+              console.log('✓ Video stopped on leave');
+            });
+          });
+          
+          // Re-initialize cursor text animations for dynamically loaded projects
+          const cursorTextElements = projectsListing.querySelectorAll('.js-cursor-text-animated');
+          console.log(`Found ${cursorTextElements.length} cursor text elements to re-initialize`);
+          
+          cursorTextElements.forEach(cursorEl => {
+            const wrapper = cursorEl.closest('.js-has-cursor-text');
+            if (!wrapper) return;
+            
+            // Add mouseenter/mouseleave to show/hide cursor text (matching build.min.js lines 24799-24804)
+            wrapper.addEventListener('mouseenter', function() {
+              cursorEl.classList.add('visible');
+              console.log('✓ Cursor text visible');
+            });
+            
+            wrapper.addEventListener('mouseleave', function() {
+              cursorEl.classList.remove('visible');
+              console.log('✓ Cursor text hidden');
+            });
+            
+            // Track mouse movement to position cursor text
+            wrapper.addEventListener('mousemove', function(e) {
+              const rect = cursorEl.getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
+              
+              // Update CSS custom properties for cursor position
+              const moovingElements = cursorEl.querySelectorAll('.mooving-elements');
+              moovingElements.forEach(el => {
+                el.style.setProperty('--x', `${x}px`);
+                el.style.setProperty('--y', `${y}px`);
+              });
+            });
+          });
+          
+          console.log('✓ Hover effects and cursor text re-initialized');
+        }
+      }, { once: true });
+      
+      // Re-initialize cursor player for homepage slider after dynamic content loads
+      window.addEventListener('slider-rendered', function() {
+        console.log('🔄 Re-initializing cursor player for homepage slider...');
+        
+        const sliderContainer = document.querySelector('.list--home.js-has-cursor-player');
+        if (!sliderContainer) {
+          console.warn('Slider container not found');
+          return;
+        }
+        
+        const cursorPlayer = sliderContainer.querySelector('.js-cursor-player-animated');
+        if (!cursorPlayer) {
+          console.warn('Cursor player not found in slider');
+          return;
+        }
+        
+        const playerVideos = cursorPlayer.querySelectorAll('.player-animated-player');
+        console.log(`Found ${playerVideos.length} cursor player videos to initialize`);
+        console.log('Cursor player element:', cursorPlayer);
+        console.log('Player videos:', playerVideos);
+        
+        // Initialize cursor player positioning
+        const moovingElements = cursorPlayer.querySelectorAll('.mooving-elements');
+        const sliderRect = sliderContainer.getBoundingClientRect();
+        
+        // Set initial position to center
+        moovingElements.forEach(el => {
+          el.style.setProperty('--x', `${sliderRect.width / 2}px`);
+          el.style.setProperty('--y', `${sliderRect.height / 2}px`);
+        });
+        
+        // Track mouse movement to position cursor player
+        sliderContainer.addEventListener('mousemove', function(e) {
+          const rect = sliderContainer.getBoundingClientRect();
+          const playersWrapper = cursorPlayer.querySelector('.players-wrapper');
+          
+          // Calculate X position (centered on cursor)
+          const x = e.clientX - rect.left - (playersWrapper ? playersWrapper.offsetWidth / 2 : 0);
+          
+          // Calculate Y position (above cursor, like posterco.tv)
+          const y = -(playersWrapper ? playersWrapper.offsetHeight : 0);
+          
+          // Update CSS custom properties for cursor position
+          moovingElements.forEach(el => {
+            el.style.setProperty('--x', `${x}px`);
+            el.style.setProperty('--y', `${y}px`);
+          });
+        });
+        
+        console.log('✓ Cursor player re-initialized with', playerVideos.length, 'videos');
+        
+        // Manually add cursor player visibility handlers (build.min.js doesn't expose ms module)
+        // Replicate build.min.js behavior: add 'visible' class on wrapper mouseenter/mousemove
+        sliderContainer.addEventListener('mouseenter', function() {
+          cursorPlayer.classList.add('visible');
+          console.log('✓ Cursor player visible (mouseenter on wrapper)');
+        });
+        
+        sliderContainer.addEventListener('mousemove', function() {
+          if (!cursorPlayer.classList.contains('visible')) {
+            cursorPlayer.classList.add('visible');
+            console.log('✓ Cursor player visible (mousemove on wrapper)');
+          }
+        });
+        
+        sliderContainer.addEventListener('mouseleave', function() {
+          cursorPlayer.classList.remove('visible');
+          playerVideos.forEach(video => video.pause());
+          console.log('✓ Cursor player hidden (mouseleave from wrapper)');
+        });
+        
+        // Re-initialize video switching for dynamically loaded content
+        const listItems = sliderContainer.querySelectorAll('li');
+        const listLinks = sliderContainer.querySelectorAll('.js-change-video');
+        const mainVideos = document.querySelectorAll('.js-main-video');
+        const mainLink = document.getElementById('homepage-main-link');
+        const cursorText = document.getElementById('homepage-cursor-text');
+        const mobileLink = document.getElementById('homepage-mobile-link');
+        const counter = document.querySelector('.box--home__info__counter span');
+        
+        console.log(`Setting up video switching for ${listItems.length} items`);
+        
+        // Ensure all cursor player videos have src loaded once and add 'loaded' class
+        playerVideos.forEach((video) => {
+          if (!video.src && video.dataset.src) {
+            video.src = video.dataset.src;
+            video.load();
+          }
+          // Add 'loaded' class like posterco.tv
+          video.addEventListener('loadeddata', function() {
+            this.classList.add('loaded');
+            console.log('✓ Cursor player video loaded');
+          }, { once: true });
+        });
+        
+        listItems.forEach((item, index) => {
+          // Handle mouseenter on LI - set data-player-active and manually trigger video switching
+          item.addEventListener('mouseenter', function() {
+            sliderContainer.setAttribute('data-player-active', index);
+            
+            // Manually switch active video (since build.min.js observer isn't working for dynamic content)
+            playerVideos.forEach((video, videoIndex) => {
+              if (videoIndex === index) {
+                video.currentTime = 0;
+                video.play().catch(err => console.log('Play prevented:', err));
+                video.classList.add('active');
+              } else {
+                video.pause();
+                video.classList.remove('active');
+              }
+            });
+            
+            console.log(`✓ Set data-player-active to ${index} and switched to video ${index + 1}`);
+          });
+          
+          // Handle click on link - switch video
+          const link = item.querySelector('.js-change-video');
+          if (link) {
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              
+              // Don't do anything if already active
+              if (item.classList.contains('is-active')) return;
+              
+              console.log(`Switching to video ${index + 1}`);
+              
+              // Update active state
+              sliderContainer.querySelectorAll('li').forEach(li => li.classList.remove('is-active'));
+              item.classList.add('is-active');
+              
+              // Update counter
+              if (counter) counter.textContent = index + 1;
+              
+              // Update links
+              const itemTitle = this.querySelector('h2').textContent;
+              if (mainLink) mainLink.href = this.href;
+              if (mobileLink) mobileLink.href = this.href;
+              if (cursorText) cursorText.textContent = `open ${itemTitle}`;
+              if (mainLink) mainLink.setAttribute('data-cursor-text', `Open ${itemTitle}`);
+              
+              // Reset timeline
+              const timeline = document.querySelector('.box--home__timeline > span');
+              if (timeline) timeline.style.width = '0';
+              
+              // Switch videos - remove visible from all, add to selected
+              mainVideos.forEach((video, videoIndex) => {
+                if (videoIndex === index) {
+                  video.currentTime = 0;
+                  video.classList.add('visible', 'loaded');
+                  video.play().catch(err => console.log('Play prevented:', err));
+                } else {
+                  video.classList.remove('visible');
+                  video.pause();
+                }
+              });
+              
+              // Add timeline animation class
+              if (timeline) timeline.classList.add('is-animated');
+              
+              console.log('✓ Video switched');
+            });
+          }
+        });
+        
+        // Handle timeline progress during video playback
+        mainVideos.forEach((video, index) => {
+          video.addEventListener('timeupdate', function() {
+            const timeline = document.querySelector('.box--home__timeline > span');
+            if (timeline && this.classList.contains('visible')) {
+              let progress = (100 * this.currentTime) / this.duration;
+              if (isNaN(progress)) progress = 0;
+              timeline.style.width = progress.toFixed(2) + '%';
+            }
+          });
+          
+          // Handle video ended - auto-advance to next video (like build.min.js line 24016-24020)
+          video.addEventListener('ended', function() {
+            const timeline = document.querySelector('.box--home__timeline > span');
+            if (timeline) timeline.classList.remove('is-animated');
+            
+            // Calculate next video index
+            let nextIndex = index + 1;
+            if (nextIndex > mainVideos.length - 1) nextIndex = 0;
+            
+            // Update active state
+            sliderContainer.querySelectorAll('li').forEach(li => li.classList.remove('is-active'));
+            const nextItem = listItems[nextIndex];
+            if (nextItem) nextItem.classList.add('is-active');
+            
+            // Update counter
+            if (counter) counter.textContent = nextIndex + 1;
+            
+            // Update links
+            const nextLink = nextItem?.querySelector('.js-change-video');
+            if (nextLink) {
+              const itemTitle = nextLink.querySelector('h2')?.textContent || '';
+              if (mainLink) mainLink.href = nextLink.href;
+              if (mobileLink) mobileLink.href = nextLink.href;
+              if (cursorText) cursorText.textContent = `open ${itemTitle}`;
+              if (mainLink) mainLink.setAttribute('data-cursor-text', `Open ${itemTitle}`);
+            }
+            
+            // Reset timeline
+            if (timeline) timeline.style.width = '0';
+            
+            // Switch videos
+            mainVideos.forEach((v, vIndex) => {
+              if (vIndex === nextIndex) {
+                v.currentTime = 0;
+                v.classList.add('visible', 'loaded');
+                v.play().catch(err => console.log('Play prevented:', err));
+              } else {
+                v.classList.remove('visible');
+                v.pause();
+              }
+            });
+            
+            // Add timeline animation class
+            if (timeline) timeline.classList.add('is-animated');
+            
+            // Update cursor player data-player-active
+            sliderContainer.setAttribute('data-player-active', nextIndex);
+            
+            console.log(`✓ Video ended - auto-advanced to video ${nextIndex + 1}`);
+          });
+        });
+        
+        // Handle mobile arrows prev/next (like build.min.js line 23928-23930)
+        const mobileArrowPrev = document.querySelector('.box--home__buttons-mobile .arrow-prev');
+        const mobileArrowNext = document.querySelector('.box--home__buttons-mobile .arrow-next');
+        
+        console.log('Mobile arrows found:', { prev: mobileArrowPrev, next: mobileArrowNext });
+        
+        // Track current video index like build.min.js does (line 23931)
+        let currentlyPlaying = 0;
+        const minPlaying = 0;
+        const maxPlaying = mainVideos.length - 1;
+        
+        function switchToVideo(targetIndex) {
+          // Update currentlyPlaying tracker
+          currentlyPlaying = targetIndex;
+          console.log(`switchToVideo called with targetIndex: ${targetIndex}, total videos: ${mainVideos.length}`);
+          // Clamp index to valid range
+          if (targetIndex < 0) targetIndex = mainVideos.length - 1;
+          if (targetIndex > mainVideos.length - 1) targetIndex = 0;
+          
+          const timeline = document.querySelector('.box--home__timeline > span');
+          if (timeline) timeline.classList.remove('is-animated');
+          
+          // Update active state
+          sliderContainer.querySelectorAll('li').forEach(li => li.classList.remove('is-active'));
+          const targetItem = listItems[targetIndex];
+          console.log('targetItem:', targetItem, 'targetIndex:', targetIndex);
+          if (targetItem) {
+            targetItem.classList.add('is-active');
+            console.log('Added is-active to:', targetItem, 'classList:', targetItem.classList);
+          }
+          
+          // Update counter
+          if (counter) counter.textContent = targetIndex + 1;
+          
+          // Update links
+          const targetLink = targetItem?.querySelector('.js-change-video');
+          if (targetLink) {
+            const itemTitle = targetLink.querySelector('h2')?.textContent || '';
+            const linkHref = targetLink.href;
+            if (mainLink) {
+              mainLink.href = linkHref;
+              mainLink.setAttribute('onclick', `window.location.replace('${linkHref}'); return false;`);
+              mainLink.setAttribute('data-cursor-text', `Open ${itemTitle}`);
+            }
+            if (mobileLink) {
+              mobileLink.href = linkHref;
+              mobileLink.setAttribute('onclick', `window.location.replace('${linkHref}'); return false;`);
+            }
+            if (cursorText) cursorText.textContent = `open ${itemTitle}`;
+          }
+          
+          // Reset timeline
+          if (timeline) timeline.style.width = '0';
+          
+          // Switch videos
+          mainVideos.forEach((v, vIndex) => {
+            if (vIndex === targetIndex) {
+              v.currentTime = 0;
+              v.classList.add('visible', 'loaded');
+              v.play().catch(err => console.log('Play prevented:', err));
+            } else {
+              v.classList.remove('visible');
+              v.pause();
+            }
+          });
+          
+          // Add timeline animation class
+          if (timeline) timeline.classList.add('is-animated');
+          
+          // Update cursor player data-player-active
+          sliderContainer.setAttribute('data-player-active', targetIndex);
+          
+          console.log(`✓ Switched to video ${targetIndex + 1}`);
+        }
+        
+        // onPrevClick - like build.min.js line 24022-24026
+        if (mobileArrowPrev) {
+          mobileArrowPrev.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('← Prev arrow clicked');
+            currentlyPlaying--;
+            if (currentlyPlaying < minPlaying) currentlyPlaying = maxPlaying;
+            console.log(`currentlyPlaying: ${currentlyPlaying}`);
+            switchToVideo(currentlyPlaying);
+          });
+        }
+        
+        // onNextClick - like build.min.js line 24027-24030
+        if (mobileArrowNext) {
+          mobileArrowNext.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('→ Next arrow clicked');
+            currentlyPlaying++;
+            if (currentlyPlaying > maxPlaying) currentlyPlaying = minPlaying;
+            console.log(`currentlyPlaying: ${currentlyPlaying}`);
+            switchToVideo(currentlyPlaying);
+          });
+        }
+        
+        console.log('✓ Video switching, timeline, and mobile arrows re-initialized');
+      }, { once: true });
+
+    </script>
+  </body>
+</html>

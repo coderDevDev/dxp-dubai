@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta
+    http-equiv="content-type"
+    content="text/html;charset=UTF-8"
+  />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Azeret+Mono&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@700&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicons/favicon-32x32.png%20favicon-32x32.html"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicons/favicon-16x16.png%20favicon-16x16.html"
+    />
+    <link rel="manifest" href="assets/favicons/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="assets/favicons/safari-pinned-tab.svg"
+      color="#000000"
+    />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../cdn.plyr.io/3.7.8/plyr.css" />
+
+    <link href="assets/dist/build.min.css" rel="stylesheet" />
+
+    <link rel="canonical" href="contact.html" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content=" Contact" />
+    <meta property="og:site_name" content="Poster" />
+    <meta property="og:url" content="contact.html" />
+    <meta name="twitter:title" content=" Contact" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta
+      name="description"
+      content="Post-Production company based in the heart of Paris, dedicated to audiovisual production, advertisement, digital content, music video feature films & documentaries."
+    />
+    <meta
+      property="og:description"
+      content="Post-Production company based in the heart of Paris, dedicated to audiovisual production, advertisement, digital content, music video feature films & documentaries."
+    />
+
+    <title> Contact</title>
+
+    <style>
+      /* Header styles loaded from data/header.json - prevent FOUC */
+      .header__logo {
+        object-fit: contain !important;
+        height: auto !important;
+        opacity: 0;
+        transition: opacity 0.15s ease-in;
+      }
+      
+      .header__logo.loaded {
+        opacity: 1;
+      }
+    </style>
+    
+    <!-- Critical header CSS - loads synchronously to prevent FOUC -->
+    <script>
+      (function() {
+        try {
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/data/header.json', false);
+          xhr.send();
+          
+          if (xhr.status === 200) {
+            var config = JSON.parse(xhr.responseText);
+            var preset = config.activePreset || 'default';
+            var presetConfig = config.presets[preset];
+            
+            if (presetConfig) {
+              window.__headerConfig = config;
+              window.__headerPreset = presetConfig;
+              window.__headerPresetName = preset;
+              
+              var style = document.createElement('style');
+              style.id = 'header-critical-css';
+              style.textContent = generateHeaderCSS(presetConfig);
+              document.head.appendChild(style);
+              
+              if (presetConfig.logo && presetConfig.logo.src) {
+                document.addEventListener('DOMContentLoaded', function() {
+                  var logos = document.querySelectorAll('.header__logo');
+                  logos.forEach(function(logo) {
+                    logo.src = presetConfig.logo.src;
+                    if (presetConfig.logo.alt) logo.alt = presetConfig.logo.alt;
+                    logo.classList.add('loaded');
+                  });
+                });
+              }
+              
+              console.log('✓ Critical header CSS loaded synchronously:', preset);
+            }
+          }
+        } catch (e) {
+          console.warn('Could not load header config synchronously:', e);
+        }
+        
+        function generateHeaderCSS(preset) {
+          var css = '';
+          if (preset.mobile) {
+            css += '@media (max-width: 767px) {';
+            css += 'html body.template-projects .app-container .header .header__nav, html body.template-homepage .app-container .header .header__nav, html body.template-about .app-container .header .header__nav, html body.template-contact .app-container .header .header__nav {display: flex !important;align-items: ' + preset.mobile.headerNav.alignItems + ' !important;padding: ' + preset.mobile.headerNav.padding + ' !important;min-height: ' + preset.mobile.headerNav.minHeight + ' !important;';
+            if (preset.mobile.headerNav.flexDirection) css += 'flex-direction: ' + preset.mobile.headerNav.flexDirection + ' !important;';
+            if (preset.mobile.headerNav.justifyContent) css += 'justify-content: ' + preset.mobile.headerNav.justifyContent + ' !important;';
+            if (preset.mobile.headerNav.gap) css += 'gap: ' + preset.mobile.headerNav.gap + ' !important;';
+            if (preset.mobile.headerNav.width) css += 'width: ' + preset.mobile.headerNav.width + ' !important;';
+            css += '}';
+            css += 'html body.template-projects .app-container .header .header__nav .logo-link, html body.template-homepage .app-container .header .header__nav .logo-link, html body.template-about .app-container .header .header__nav .logo-link, html body.template-contact .app-container .header .header__nav .logo-link {display: flex !important;align-items: center !important;';
+            if (preset.mobile.logoLink.maxWidth) css += 'max-width: ' + preset.mobile.logoLink.maxWidth + ' !important;';
+            if (preset.mobile.logoLink.flex) css += 'flex: ' + preset.mobile.logoLink.flex + ' !important;';
+            if (preset.mobile.logoLink.flexShrink) css += 'flex-shrink: ' + preset.mobile.logoLink.flexShrink + ' !important;';
+            if (preset.mobile.logoLink.paddingRight) css += 'padding-right: ' + preset.mobile.logoLink.paddingRight + ' !important;';
+            if (preset.mobile.logoLink.width) css += 'width: ' + preset.mobile.logoLink.width + ' !important;';
+            if (preset.mobile.logoLink.margin) css += 'margin: ' + preset.mobile.logoLink.margin + ' !important;';
+            css += '}';
+            css += 'html body.template-projects .app-container .header .header__nav .logo-link .header__logo, html body.template-homepage .app-container .header .header__nav .logo-link .header__logo, html body.template-about .app-container .header .header__nav .logo-link .header__logo, html body.template-contact .app-container .header .header__nav .logo-link .header__logo {display: block !important;max-height: ' + preset.mobile.logo.maxHeight + ' !important;max-width: ' + preset.mobile.logo.maxWidth + ' !important;width: ' + preset.mobile.logo.width + ' !important;' + (preset.mobile.logo.margin ? 'margin: ' + preset.mobile.logo.margin + ' !important;' : 'margin: 0 !important;') + '}';
+            css += 'html body.template-projects .app-container .header .header__nav .btn--menu, html body.template-homepage .app-container .header .header__nav .btn--menu, html body.template-about .app-container .header .header__nav .btn--menu, html body.template-contact .app-container .header .header__nav .btn--menu {flex-shrink: 0 !important;margin: 0 !important;}';
+            css += '}';
+          }
+          if (preset.desktop) {
+            css += '@media (min-width: 768px) {';
+            if (preset.desktop.headerNav) {
+              css += 'html body.template-projects .app-container .header .header__nav, html body.template-homepage .app-container .header .header__nav, html body.template-about .app-container .header .header__nav, html body.template-contact .app-container .header .header__nav {display: flex !important;';
+              if (preset.desktop.headerNav.flexDirection) css += 'flex-direction: ' + preset.desktop.headerNav.flexDirection + ' !important;';
+              if (preset.desktop.headerNav.justifyContent) css += 'justify-content: ' + preset.desktop.headerNav.justifyContent + ' !important;';
+              if (preset.desktop.headerNav.gap) css += 'gap: ' + preset.desktop.headerNav.gap + ' !important;';
+              if (preset.desktop.headerNav.alignItems) css += 'align-items: ' + preset.desktop.headerNav.alignItems + ' !important;';
+              if (preset.desktop.headerNav.width) css += 'width: ' + preset.desktop.headerNav.width + ' !important;';
+              if (preset.desktop.headerNav.minHeight) css += 'min-height: ' + preset.desktop.headerNav.minHeight + ' !important;';
+              css += '}';
+            }
+            if (preset.desktop.logoLink) {
+              css += 'html body.template-projects .app-container .header .header__nav .logo-link, html body.template-homepage .app-container .header .header__nav .logo-link, html body.template-about .app-container .header .header__nav .logo-link, html body.template-contact .app-container .header .header__nav .logo-link {';
+              if (preset.desktop.logoLink.width) css += 'width: ' + preset.desktop.logoLink.width + ' !important;';
+              if (preset.desktop.logoLink.flexShrink) css += 'flex-shrink: ' + preset.desktop.logoLink.flexShrink + ' !important;';
+              if (preset.desktop.logoLink.margin) css += 'margin: ' + preset.desktop.logoLink.margin + ' !important;';
+              css += '}';
+            }
+            css += 'html body.template-projects .app-container .header .header__nav .logo-link .header__logo, html body.template-homepage .app-container .header .header__nav .logo-link .header__logo, html body.template-about .app-container .header .header__nav .logo-link .header__logo, html body.template-contact .app-container .header .header__nav .logo-link .header__logo {display: block !important;max-height: ' + preset.desktop.logo.maxHeight + ' !important;width: ' + preset.desktop.logo.width + ' !important;' + (preset.desktop.logo.margin ? 'margin: ' + preset.desktop.logo.margin + ' !important;' : '') + '}';
+            css += '}';
+          }
+          if (preset.extraLarge) {
+            css += '@media (min-width: 1200px) {html body.template-projects .app-container .header .header__nav .logo-link .header__logo, html body.template-homepage .app-container .header .header__nav .logo-link .header__logo, html body.template-about .app-container .header .header__nav .logo-link .header__logo, html body.template-contact .app-container .header .header__nav .logo-link .header__logo {max-height: ' + preset.extraLarge.logo.maxHeight + ' !important;}}';
+          }
+          return css;
+        }
+      })();
+    </script>
+  </head>
+  <body class="template-contact">
+    <main class="main">
+      <div class="app-container body-light">
+        <div class="app-container-inner">
+          <header class="header">
+            <div class="header__nav">
+              <a href="index.html" data-navigo class="logo-link">
+                <img
+                  class="header__logo"
+                  src="assets/img/dubaifilmmaker-logo-dark-bolder.svg"
+                  alt="Poster"
+                />
+              </a>
+              <a href="#main_menu" class="btn btn--menu">
+                <span>menu.</span>
+              </a>
+            </div>
+
+            <div class="header__navigations-wrapper">
+              <nav id="main_menu" class="header__subnav">
+                <ul>
+                  <li data-slug="homepage">
+                    <a data-navigo data-slug="homepage" href="#"> Homepage </a>
+                  </li>
+                  <li data-slug="works">
+                    <a data-navigo data-slug="works" href="works"> Works </a>
+                  </li>
+                  <li data-slug="about">
+                    <a 
+                    data-navigo 
+                    
+                    data-slug="about" 
+                    
+                    href="/about"> About </a>
+                  </li>
+                  <li data-slug="contact">
+                    <a
+                      data-navigo
+                      data-slug="contact"
+                      aria-current="page"
+                      href="contact"
+                    >
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </header>
+          <div class="page-inner-content">
+            <h1 class="hidden">Contact</h1>
+
+            <div class="contact-inner-wrapper">
+              <div class="box box--staff">
+                <ul class="list list--staff">
+                  <!-- Staff content will be loaded from JSON -->
+                  <li>
+                    <h2>Loading staff...</h2>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="box box--address">
+                <!-- Address content will be loaded from JSON -->
+                <p>Loading address...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!--  -->
+
+    <script src="assets/dist/build.min.js"></script>
+    <script src="assets/js/data-loader.js"></script>
+    <script src="assets/js/page-renderer.js"></script>
+    <script src="assets/js/app-init.js"></script>
+    <script src="assets/js/site-config.js"></script>
+  </body>
+
+  <!-- Mirrored from posterco.tv/contact by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Oct 2025 13:35:27 GMT -->
+</html>

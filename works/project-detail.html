@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Azeret+Mono&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@700&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../assets/favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets/favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/favicons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="../assets/favicons/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="../assets/favicons/safari-pinned-tab.svg"
+      color="#000000"
+    />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
+    <link href="../assets/dist/build.min.css" rel="stylesheet" />
+
+    <title id="page-title">DubaiFilmMaker – Project</title>
+    <meta name="description" content="" id="page-description" />
+  </head>
+  <body class="template-project">
+    <main class="main">
+      <div class="app-container">
+        <div class="app-container-inner">
+          <div class="page-inner-content">
+            <div class="box box--video">
+              <div class="box box--video__info">
+                <h1 id="project-title">Loading...</h1>
+                <p id="project-client"></p>
+
+                <a
+                  href="#credits"
+                  class="lnk lnk--credits js-toggle-credits"
+                  data-show="view credits"
+                  data-hide="close credits"
+                ></a>
+                <div id="credits" class="box--video__credits">
+                  <dl id="credits-list">
+                    <!-- Credits will be loaded dynamically -->
+                  </dl>
+                </div>
+              </div>
+
+              <div
+                class="box--video__wrapper video-wrapper js-player fit-contain"
+              >
+                <video
+                  id="project-video"
+                  src=""
+                  autoplay
+                  playsinline
+                  controls
+                ></video>
+              </div>
+
+              <button
+                class="box--video__close lnk lnk--through js-back-link"
+              >
+                close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="../assets/dist/build.min.js"></script>
+    <script src="../assets/js/data-loader.js"></script>
+    <script src="../assets/js/page-renderer.js"></script>
+
+    <script>
+      // Get project ID from URL hash
+      function getProjectIdFromURL() {
+        console.log('Full URLss:', window.location.href);
+        console.log('Hash:', window.location.hash);
+        
+        let id = null;
+        
+        if (window.location.hash) {
+          const hashParams = new URLSearchParams(window.location.hash.substring(1));
+          id = hashParams.get('id');
+          console.log('Extracted ID from hash:', id);
+        }
+        
+        return id;
+      }
+
+      // Load project data from API or JSON
+      async function loadProjectData() {
+        try {
+          const projectId = getProjectIdFromURL();
+          
+          if (!projectId) {
+            console.error('No project ID provided');
+            document.getElementById('project-title').textContent = 'Project not found';
+            return;
+          }
+
+          console.log('Loading project with ID:', projectId);
+
+          const projects = await window.fetchProjects();
+          const project = projects.find(p => p.id == projectId);
+
+          if (!project) {
+            console.error('Project not found with ID:', projectId);
+            document.getElementById('project-title').textContent = 'Project not found';
+            return;
+          }
+
+          console.log('Project loaded:', project);
+          window.PageRenderer.renderProjectDetail(project);
+
+        } catch (error) {
+          console.error('Error loading project:', error);
+          document.getElementById('project-title').textContent = 'Error loading project';
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', loadProjectData);
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const backButton = document.querySelector('.js-back-link');
+        if (backButton) {
+          backButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = '../index.html';
+            // if (window.history.length > 1) {
+            //   window.history.back();
+            // } else {
+            //   window.location.href = '../index.html';
+            // }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

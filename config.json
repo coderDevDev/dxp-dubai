@@ -1,0 +1,177 @@
+{
+  "site": {
+    "mode": "posterco",
+    "description": "Choose which site content to display: 'dubaifilmmaker' or 'posterco'",
+    "options": ["dubaifilmmaker", "posterco"]
+  },
+  "header": {
+    "logo": {
+      "position": "left",
+      "description": "Logo position in header: 'left', 'center', or 'right'",
+      "options": ["left", "center", "right"],
+      "src": "assets/img/dubaifilmmaker.svg",
+      "alt": "DubaiFilmMaker"
+    },
+    "stylePreset": "default",
+    "stylePresetDescription": "Choose header style preset: 'default', 'reversed', 'stackedLogo'",
+    "stylePresets": {
+      "default": {
+        "name": "Default Layout",
+        "description": "Logo left, menu right, optimized for horizontal logo",
+        "logo": {
+          "src": "assets/img/dubaifilmmaker.svg"
+        },
+        "mobile": {
+          "headerNav": {
+            "alignItems": "center",
+            "padding": "0px 0",
+            "minHeight": "40px",
+            "flexDirection": "row"
+          },
+          "logoLink": {
+            "maxWidth": "calc(100% - 100px)",
+            "flex": "1"
+          },
+          "logo": {
+            "maxHeight": "80px",
+            "maxWidth": "100%",
+            "width": "auto"
+          }
+        },
+        "desktop": {
+          "logo": {
+            "maxHeight": "80px",
+            "width": "100%"
+          }
+        },
+        "extraLarge": {
+          "logo": {
+            "maxHeight": "100px"
+          }
+        }
+      },
+      "reversed": {
+        "name": "Reversed Layout",
+        "description": "Logo right, menu left",
+        "logo": {
+          "src": "assets/img/dubaifilmmaker.svg"
+        },
+        "mobile": {
+          "headerNav": {
+            "alignItems": "center",
+            "padding": "0 15px 0 20px",
+            "minHeight": "50px",
+            "flexDirection": "row-reverse",
+            "justifyContent": "space-between",
+            "gap": "24px"
+          },
+          "logoLink": {
+            "maxWidth": "180px",
+            "flexShrink": "0",
+            "paddingRight": "20px"
+          },
+          "logo": {
+            "maxHeight": "80px",
+            "maxWidth": "100%",
+            "width": "auto"
+          }
+        },
+        "desktop": {
+          "headerNav": {
+            "flexDirection": "row-reverse",
+            "justifyContent": "space-between",
+            "gap": "24px"
+          },
+          "logo": {
+            "maxHeight": "80px",
+            "width": "auto"
+          }
+        },
+        "extraLarge": {
+          "logo": {
+            "maxHeight": "100px"
+          }
+        }
+      },
+      "stackedLogo": {
+        "name": "Stacked Logo",
+        "description": "Optimized for tall stacked logo (DUBAI FILM MAKER)",
+        "logo": {
+          "src": "assets/img/dubaifilmmaker123.svg"
+        },
+        "mobile": {
+          "headerNav": {
+            "alignItems": "center",
+            "padding": "0px 0",
+            "minHeight": "40px",
+            "flexDirection": "row"
+          },
+          "logoLink": {
+            "maxWidth": "calc(100% - 100px)",
+            "flex": "1"
+          },
+          "logo": {
+            "maxHeight": "100px",
+            "maxWidth": "100%",
+            "width": "auto"
+          }
+        },
+        "desktop": {
+          "logo": {
+            "maxHeight": "80px",
+            "width": "100%"
+          }
+        },
+        "extraLarge": {
+          "logo": {
+            "maxHeight": "120px"
+          }
+        }
+      }
+    }
+  },
+  "features": {
+    "introAnimation": {
+      "enabled": false,
+      "description": "Show/hide the intro animation (bloc-intro)"
+    },
+    "navigation": {
+      "worksPage": {
+        "enabled": true,
+        "description": "Enable/disable Works navigation link"
+      },
+      "aboutPage": {
+        "enabled": true,
+        "description": "Enable/disable About navigation link"
+      },
+      "contactPage": {
+        "enabled": true,
+        "description": "Enable/disable Contact navigation link"
+      }
+    },
+    "projectsNav": {
+      "enabled": true,
+      "description": "Enable/disable projects category navigation (Featured film, Commercials, etc.)"
+    },
+    "homeBoxLinks": {
+      "videoClickable": {
+        "enabled": true,
+        "description": "Enable/disable clicking on videos in box--home to open project page"
+      },
+      "mobileViewProject": {
+        "enabled": true,
+        "description": "Enable/disable 'view project' button on mobile in box--home"
+      }
+    },
+    "projectsListing": {
+      "clickable": {
+        "enabled": true,
+        "description": "Enable/disable clicking on projects in bloc-projects-listing"
+      }
+    }
+  },
+  "demo": {
+    "mode": true,
+    "description": "When true, disables most interactive features for client presentation"
+  }
+}

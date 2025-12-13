@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logo Position Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .test-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+    }
+    .test-info {
+      background: #e8f4f8;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 20px 0;
+    }
+    .test-buttons {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    button.left { background: #4CAF50; color: white; }
+    button.center { background: #2196F3; color: white; }
+    button.right { background: #ff9800; color: white; }
+    button:hover { opacity: 0.8; transform: translateY(-2px); }
+    
+    .current-config {
+      background: #fff3cd;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 20px 0;
+      border-left: 4px solid #ffc107;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    .status {
+      padding: 10px;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+    .status.success { background: #d4edda; color: #155724; }
+    .status.error { background: #f8d7da; color: #721c24; }
+    .console-output {
+      background: #000;
+      color: #0f0;
+      padding: 15px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      max-height: 300px;
+      overflow-y: auto;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>🎯 Logo Position Test</h1>
+    
+    <div class="test-info">
+      <h3>Current Configuration</h3>
+      <p>Open your browser console (F12) to see detailed logs</p>
+      <div id="currentPos"></div>
+    </div>
+
+    <div class="test-buttons">
+      <button class="left" onclick="testPosition('left')">Test Left</button>
+      <button class="center" onclick="testPosition('center')">Test Center</button>
+      <button class="right" onclick="testPosition('right')">Test Right</button>
+      <button onclick="reloadPage()">Reload Page</button>
+    </div>
+
+    <div id="status"></div>
+
+    <div class="current-config">
+      <h3>Instructions:</h3>
+      <ol>
+        <li>Edit <code>config.json</code> and change <code>"position"</code> value</li>
+        <li>Reload the main page</li>
+        <li>Check browser console for logs starting with ✓</li>
+        <li>Or use the test buttons above to apply positions dynamically</li>
+      </ol>
+    </div>
+
+    <div class="console-output" id="console">
+      <div>Console Output:</div>
+    </div>
+  </div>
+
+  <script>
+    // Load current config
+    fetch('/config.json')
+      .then(res => res.json())
+      .then(config => {
+        document.getElementById('currentPos').innerHTML = `
+          <strong>Position:</strong> <code>${config.header.logo.position}</code>
+        `;
+        log(`✓ Config loaded: position = ${config.header.logo.position}`);
+      })
+      .catch(err => {
+        log('❌ Error loading config: ' + err.message, true);
+      });
+
+    function testPosition(position) {
+      const headerNav = document.querySelector('.header__nav');
+      
+      if (!headerNav) {
+        log('❌ .header__nav not found - you need to run this on the main page!', true);
+        document.getElementById('status').innerHTML = 
+          '<div class="status error">⚠️ This test needs to run on the main index.html page. Open index.html and check the console.</div>';
+        return;
+      }
+
+      // Remove existing classes
+      headerNav.classList.remove('logo-left', 'logo-center', 'logo-right');
+      
+      // Add new class
+      headerNav.classList.add(`logo-${position}`);
+      
+      log(`✓ Applied class: logo-${position}`);
+      log(`✓ Current classes: ${headerNav.className}`);
+      
+      document.getElementById('status').innerHTML = 
+        `<div class="status success">✓ Logo positioned: ${position}</div>`;
+    }
+
+    function reloadPage() {
+      window.location.href = '/';
+    }
+
+    function log(message, isError = false) {
+      const consoleDiv = document.getElementById('console');
+      const line = document.createElement('div');
+      line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      line.style.color = isError ? '#ff6b6b' : '#0f0';
+      consoleDiv.appendChild(line);
+      consoleDiv.scrollTop = consoleDiv.scrollHeight;
+      
+      // Also log to real console
+      console.log(message);
+    }
+
+    // Intercept console logs
+    const originalLog = console.log;
+    console.log = function(...args) {
+      originalLog.apply(console, args);
+      log(args.join(' '));
+    };
+  </script>
+</body>
+</html>

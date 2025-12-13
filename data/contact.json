@@ -1,0 +1,19 @@
+{
+  "page": {
+    "title": "Contact",
+    "description": "Get in touch with our team",
+    "staff": [
+      
+    ],
+    "address": {
+      "street": "",
+      "city": "Dubai, UAE",
+      "phone": "+971 50 969 9683",
+      "email": "hello@dubaifilmmaker.ae"
+    },
+    "social": {
+      "vimeo": "https://vimeo.com/dubaifilmmaker",
+      "instagram": "https://www.instagram.com/dubaifilmmaker/"
+    }
+  }
+}

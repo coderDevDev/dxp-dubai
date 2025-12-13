@@ -1,0 +1,80 @@
+{
+  "dubaifilmmaker": {
+    "projects": [
+      {
+        "title": "Dubai Film Project 1",
+        "director": "Director Name",
+        "category": "Commercials",
+        "slug": "dubai-film-project-1",
+        "dataCat": "commercials",
+        "posterImage": "https://via.placeholder.com/800x450/000000/FFFFFF?text=Dubai+Project+1",
+        "posterImageSrcset": "https://via.placeholder.com/300x169/000000/FFFFFF?text=Dubai+Project+1 300w, https://via.placeholder.com/800x450/000000/FFFFFF?text=Dubai+Project+1 800w",
+        "videoUrl": "https://player.vimeo.com/progressive_redirect/playback/1117423122/rendition/720p/file.mp4?loc=external&oauth2_token_id=1774001646&signature=2beba7d654e6bde289a39893a02343ccfe40c768e51f7d98da8907a47d67c6f3"
+      },
+      {
+        "title": "Dubai Film Project 2",
+        "director": "Director Name",
+        "category": "Music videos",
+        "slug": "dubai-film-project-2",
+        "dataCat": "music-videos",
+        "posterImage": "https://via.placeholder.com/800x450/000000/FFFFFF?text=Dubai+Project+2",
+        "posterImageSrcset": "https://via.placeholder.com/300x169/000000/FFFFFF?text=Dubai+Project+2 300w, https://via.placeholder.com/800x450/000000/FFFFFF?text=Dubai+Project+2 800w",
+        "videoUrl": "https://player.vimeo.com/progressive_redirect/playback/1115887892/rendition/720p/file.mp4?loc=external&oauth2_token_id=1774001646&signature=ce98919773ef73df7b06e9afe19bf78d05324f37484ab4206dc2f8a59df9f8a7"
+      },
+      {
+        "title": "Dubai Film Project 3",
+        "director": "Director Name",
+        "category": "Featured film",
+        "slug": "dubai-film-project-3",
+        "dataCat": "featured-film",
+        "posterImage": "https://via.placeholder.com/800x450/000000/FFFFFF?text=Dubai+Project+3",
+        "posterImageSrcset": "https://via.placeholder.com/300x169/000000/FFFFFF?text=Dubai+Project+3 300w, https://via.placeholder.com/800x450/000000/FFFFFF?text=Dubai+Project+3 800w",
+        "videoUrl": "https://player.vimeo.com/progressive_redirect/playback/1117421162/rendition/720p/file.mp4?loc=external&oauth2_token_id=1774001646&signature=29b653edb9566f10b387ea9e2c902828db43fd2acfea37f549b5e2f53a03a338"
+      }
+    ]
+  },
+  "posterco": {
+    "projects": [
+      {
+        "title": "Veuve Clicquot x Jacquemus",
+        "director": "Jonas Lindstroem",
+        "category": "Commercials",
+        "slug": "veuve-clicquot-x-jacquemus",
+        "dataCat": "commercials",
+        "posterImage": "https://posterco.tv/media/pages/works/veuve-clicquot-x-jacquemus/f467980f83-1757508080/vlcsnap-2025-09-09-17h13m46s724.jpg",
+        "posterImageSrcset": "https://posterco.tv/media/pages/works/veuve-clicquot-x-jacquemus/f467980f83-1757508080/vlcsnap-2025-09-09-17h13m46s724-300x.jpg 300w, https://posterco.tv/media/pages/works/veuve-clicquot-x-jacquemus/f467980f83-1757508080/vlcsnap-2025-09-09-17h13m46s724-800x.jpg 800w",
+        "videoUrl": "https://player.vimeo.com/progressive_redirect/playback/1117423122/rendition/720p/file.mp4?loc=external&oauth2_token_id=1774001646&signature=2beba7d654e6bde289a39893a02343ccfe40c768e51f7d98da8907a47d67c6f3"
+      },
+      {
+        "title": "Dior Sauvage",
+        "director": "Jean-Baptiste Mondino",
+        "category": "Commercials",
+        "slug": "dior-sauvage-2025",
+        "dataCat": "commercials",
+        "posterImage": "https://posterco.tv/media/pages/works/dior-sauvage-2025/a4ff1365d5-1757003605/poster-jb-mondinoxdior-sauvage-2025.jpg",
+        "posterImageSrcset": "https://posterco.tv/media/pages/works/dior-sauvage-2025/a4ff1365d5-1757003605/poster-jb-mondinoxdior-sauvage-2025-300x.jpg 300w, https://posterco.tv/media/pages/works/dior-sauvage-2025/a4ff1365d5-1757003605/poster-jb-mondinoxdior-sauvage-2025-800x.jpg 800w",
+        "videoUrl": "https://player.vimeo.com/progressive_redirect/playback/1115887892/rendition/720p/file.mp4?loc=external&oauth2_token_id=1774001646&signature=ce98919773ef73df7b06e9afe19bf78d05324f37484ab4206dc2f8a59df9f8a7"
+      },
+      {
+        "title": "Miss Dior",
+        "director": "Manu Cossu",
+        "category": "Commercials",
+        "slug": "miss-dior",
+        "dataCat": "commercials",
+        "posterImage": "https://posterco.tv/media/pages/works/miss-dior/3aff5631b3-1757508014/vlcsnap-2025-09-08-18h06m11s355.jpg",
+        "posterImageSrcset": "https://posterco.tv/media/pages/works/miss-dior/3aff5631b3-1757508014/vlcsnap-2025-09-08-18h06m11s355-300x.jpg 300w, https://posterco.tv/media/pages/works/miss-dior/3aff5631b3-1757508014/vlcsnap-2025-09-08-18h06m11s355-800x.jpg 800w",
+        "videoUrl": "https://player.vimeo.com/progressive_redirect/playback/1117421162/rendition/720p/file.mp4?loc=external&oauth2_token_id=1774001646&signature=29b653edb9566f10b387ea9e2c902828db43fd2acfea37f549b5e2f53a03a338"
+      },
+      {
+        "title": "Eau Pure",
+        "director": "Manu Cossu",
+        "category": "Commercials",
+        "slug": "kenzo",
+        "dataCat": "commercials",
+        "posterImage": "https://posterco.tv/media/pages/works/kenzo/b9db050d4a-1749595358/vlcsnap-2025-06-11-00h23m53s748-min.png",
+        "posterImageSrcset": "https://posterco.tv/media/pages/works/kenzo/b9db050d4a-1749595358/vlcsnap-2025-06-11-00h23m53s748-min-300x.png 300w, https://posterco.tv/media/pages/works/kenzo/b9db050d4a-1749595358/vlcsnap-2025-06-11-00h23m53s748-min-800x.png 800w",
+        "videoUrl": "https://player.vimeo.com/progressive_redirect/playback/1092256830/rendition/720p/file.mp4?loc=external&oauth2_token_id=1774001646&signature=87a0f012363c1d6c208d9266ea550a6971c69a28b495657bc35a91a5ae4cedfd"
+      }
+    ]
+  }
+}
