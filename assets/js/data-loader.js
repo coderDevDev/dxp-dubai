@@ -4,12 +4,12 @@
  * Handles API/JSON fallback and caching
  */
 
-(function() {
+(function () {
   'use strict';
 
   const API_CONFIG = {
     USE_CMS_API: true,
-    CMS_BASE_URL: 'http://localhost:3001/api',
+    CMS_BASE_URL: 'https://dxp-dubai-cms-cop4.vercel.app/api',
     LOCAL_PATHS: {
       projects: 'data/project.json',
       about: 'data/about.json',
@@ -22,31 +22,31 @@
 
   async function fetchData(endpoint, localPath) {
     const cacheKey = endpoint || localPath;
-    
+
     if (cache[cacheKey]) {
       console.log(`✓ Using cached data for: ${cacheKey}`);
       return cache[cacheKey];
     }
 
     try {
-      const url = API_CONFIG.USE_CMS_API 
+      const url = API_CONFIG.USE_CMS_API
         ? `${API_CONFIG.CMS_BASE_URL}/${endpoint}`
         : localPath;
-      
+
       console.log(`Fetching ${endpoint || 'data'} from: ${url}`);
-      
+
       const response = await fetch(url);
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const data = await response.json();
       cache[cacheKey] = data;
       return data;
     } catch (error) {
       console.error(`Error fetching ${endpoint || 'data'}:`, error);
-      
+
       if (API_CONFIG.USE_CMS_API && localPath) {
         console.log(`CMS API failed, falling back to local JSON...`);
         try {
@@ -59,7 +59,7 @@
           throw fallbackError;
         }
       }
-      
+
       throw error;
     }
   }
