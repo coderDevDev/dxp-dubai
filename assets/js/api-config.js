@@ -3,10 +3,10 @@
 const API_CONFIG = {
   // Set to true to use CMS API, false to use local JSON
   USE_CMS_API: true,
-  
+
   // CMS API base URL (update this with your actual CMS URL)
-  CMS_BASE_URL: 'http://localhost:3001/api',
-  
+  CMS_BASE_URL: 'https://dxp-dubai-cms-cop4.vercel.app/api',
+
   // Local JSON fallback paths
   LOCAL_PATHS: {
     projects: 'data/project.json',
@@ -19,34 +19,39 @@ const API_CONFIG = {
 // Generic fetch function with fallback
 async function fetchData(endpoint, localPath) {
   try {
-    const url = API_CONFIG.USE_CMS_API 
+    const url = API_CONFIG.USE_CMS_API
       ? `${API_CONFIG.CMS_BASE_URL}/${endpoint}`
       : localPath;
-    
+
     console.log(`Fetching ${endpoint} from: ${url}`);
-    
+
     const response = await fetch(url);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error(`Error fetching ${endpoint}:`, error);
-    
+
     // If CMS API fails, try fallback to local JSON
     if (API_CONFIG.USE_CMS_API) {
-      console.log(`CMS API failed for ${endpoint}, falling back to local JSON...`);
+      console.log(
+        `CMS API failed for ${endpoint}, falling back to local JSON...`
+      );
       try {
         const response = await fetch(localPath);
         return await response.json();
       } catch (fallbackError) {
-        console.error(`Fallback to local JSON also failed for ${endpoint}:`, fallbackError);
+        console.error(
+          `Fallback to local JSON also failed for ${endpoint}:`,
+          fallbackError
+        );
         throw fallbackError;
       }
     }
-    
+
     throw error;
   }
 }
